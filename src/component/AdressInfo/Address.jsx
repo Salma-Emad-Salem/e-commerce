@@ -3,9 +3,6 @@ import { useContext, useState } from "react";
 import * as yup from 'yup';
 import { useNavigate, useParams } from "react-router-dom";
 import { cartContext } from "../../context/CartContext";
-
-
-
   
 export default function Address({children}) {
   const schema = yup.object({
@@ -15,10 +12,9 @@ export default function Address({children}) {
     })
   const navigate = useNavigate();
   const {id}=useParams();
-  const {onlinePayment,cashPayment,setCounter}=useContext(cartContext);
+  const {onlinePayment,cashPayment,setCounter ,userid}=useContext(cartContext);
   const [paymentMethod,setPaymentMethod]=useState(null);
   let [loadingProduct,setLoadingProduct]=useState(true)
-  const [apper,setApper]=useState(false);
 
 
   
@@ -39,10 +35,8 @@ export default function Address({children}) {
       console.log(data)
       setLoadingProduct(false)
       if(data?.status === 'success'){
-        setCash(data)
-        setApper(true)
         // localStorage.setItem('userId',data?.data.user)
-        // navigate(`/CashOrder/${data.data?.user}`)
+        navigate(`/CashOrder/${userid}`)
         setLoadingProduct(true)
         setCounter(0)
       }
@@ -114,26 +108,6 @@ export default function Address({children}) {
           <button type="button" className="btn d-block " onClick={()=>setPaymentMethod('cash')} > Cash on Delivery (COD)</button>
           {paymentMethod && addressDetails.dirty && addressDetails.isValid ? (<button disabled={!loadingProduct} type="submit" className="btn button d-block m-auto" >Submit</button>) : ''}
           </div>:''}
-            {apper ? <div className="recipt py-5 mb-3">
-          <div className="container">
-            <div className="row">
-            <div className="col-md-6  form-control py-4 mt-4">
-                    <div className="UserCart">
-                      <div  className="details px-3">
-                      <p className="text-main fw-bolder fs-4">Payment is Cash </p>
-                        <p>Your Address is : </p>
-                        <p>Your Number is : </p>
-                        <p>Your City is : </p>
-                      </div>
-                       <div className="shipping">
-                        <p className="text-center fs-5 fw-bold text-main"> Your orders :</p>
-                       </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>:''}
 
 
       
