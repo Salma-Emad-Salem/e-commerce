@@ -65,8 +65,10 @@ async function cashPayment(cartId , shippingAddress){
     .then(({data})=> data).catch(err=>err)
 
 }
-async function getAllOrdersUser(userid){
-    return axios.get(baseUrl + "orders/user/" + userid,{
+const userid =localStorage.getItem('userId')
+async function getAllOrdersUser(){
+
+    return axios.get(baseUrl + `orders/user/${userid}`,{
         headers:{
             token:localStorage.getItem('token'),
         }
@@ -86,6 +88,7 @@ export default function CartContainr({children}){
     ,onlinePayment
     ,cashPayment
     ,getAllOrdersUser
+    ,userid
 
     }}>
         {children}
