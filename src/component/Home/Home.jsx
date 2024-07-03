@@ -47,20 +47,20 @@ useEffect(()=>{
       <div className='my-3 container home'>
         <div className='sliderone'>
           <div className="row ">
-            <div className="container d-flex ">
+            <div className="container imgcontainer">
             <div className="col-md-9">
             <Slider {...first} className='homeSlide'>
             <div>
-              <img src={img3} className='w-100' alt=""  height={300} />
+              <img src={img3}  alt=""  height={300} />
               </div>
               <div>
-              <img src={img4} className='w-100' alt=""  height={300} />
+              <img src={img4}  alt=""  height={300} />
               </div>
               <div>
-              <img src={img2} className='w-100' alt=""  height={300} />
+              <img src={img2}  alt=""  height={300} />
               </div>
               <div>
-              <img src={img1} className='w-100' alt=""  height={300} />
+              <img src={img1}  alt=""  height={300} />
               </div>
 
       </Slider>

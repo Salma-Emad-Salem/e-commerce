@@ -3,8 +3,8 @@ import React, {  useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { cartContext } from '../../context/CartContext'
 import { wishListContext } from '../../context/WishList'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 
 
@@ -16,15 +16,7 @@ export default function ProductDetails() {
     let x = useParams()
 
 
-    let notifyWish = () => toast.success('Item added to wishlist !', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
 
-      });
       
     let notify = () => toast.success('Item added to cart !', {
         position: "top-right",
@@ -55,7 +47,7 @@ export default function ProductDetails() {
                 
         if(data.status ==='success'){
             setCounter(data.numOfCartItems)
-            notify()
+            toast.success('Item added to your cart !')
             
             
     localStorage.setItem('userId',data?.data.cartOwner)
@@ -65,9 +57,9 @@ export default function ProductDetails() {
     async function addWishList(productId){
         let data =await addProductWishList(productId)
         let count = data?.data.length
-        notifyWish()
         if(data.status ==='success'){
           setCounterWish(count)
+          toast.success('Item added to your wishlist !')
          }
       }
 
@@ -101,7 +93,7 @@ export default function ProductDetails() {
     
                         </div>
                         <button onClick={()=> CartItem(product._id)}   className='btn bg-main w-100 text-white'>Add To Cart</button>
-                        <ToastContainer />
+                        
                     </div>
                 </div>
             </div>

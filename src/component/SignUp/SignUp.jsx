@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 export default function SignUp() {
@@ -15,6 +16,7 @@ export default function SignUp() {
     // console.log(data)
     if(data.message === 'success'){
       navigate('/SignIn')
+      toast.success('User is Created .')
     }
   }).catch((errors)=>{
     // console.log(errors)

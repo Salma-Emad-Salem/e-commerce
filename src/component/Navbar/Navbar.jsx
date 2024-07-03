@@ -10,7 +10,6 @@ export default function Navbar() {
     let{counterWish}=useContext(wishListContext)
 
     useEffect(()=>{
-        //self invicd fUNCTION 
         ( async ()=>{
             let data = await getCart()
             if(data.status ==='success'){
@@ -79,6 +78,11 @@ export default function Navbar() {
                     {counterWish }
                     <span className="visually-hidden">unread messages</span>
                     </span> :''}
+                    </NavLink>
+                    </li>
+                    <li className="nav-item ">
+                    <NavLink className="nav-link position-relative" to="/AllOrders"> Orders
+                    <i className='fa-solid fa-car px-1'></i>
                     </NavLink>
                     </li>
                     <li className="nav-item">

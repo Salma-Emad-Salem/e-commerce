@@ -1,5 +1,6 @@
 
 import { RouterProvider , createBrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import MainLayout from './component/MainLayout/MainLayout';
 import Home from './component/Home/Home';
 import Products from './component/Products/Products';
@@ -22,6 +23,9 @@ import ForgetPassword from './component/forgetpassword/ForgetPassword';
 import ResetPassword from './component/ResetPassword/ResetPassword'
 import NewPass from './component/NewPassword/NewPass';
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+import AllOrders from './component/allorders/AllOrders';
+
 
 
 
@@ -36,6 +40,7 @@ function App() {
       {path:'Brands', element:<ProductRoutes> <Brands/> </ProductRoutes> },
       {path:'Cart', element: <ProductRoutes >  <Cart/></ProductRoutes>},
       {path:'WichList', element: <ProductRoutes>  <WichList/> </ProductRoutes>},
+      {path:'AllOrders',element: <ProductRoutes> <AllOrders/> </ProductRoutes>},
       {path:'ProductDetails/:MyId', element: <ProductRoutes>  <ProductDetails/> </ProductRoutes>},
       {path:'Address/:id', element: <ProductRoutes>  <Address/> </ProductRoutes>},
       {path:'CashOrder/:id', element: <ProductRoutes>  <CashOrder/> </ProductRoutes>},
@@ -55,19 +60,25 @@ function App() {
 
   return (
     <>
-<CartContainr>
-<WishLIstContainr>
-<RouterProvider router={routes} />
-</WishLIstContainr>
-</CartContainr>
-
-
-
     <Offline>
       <div className='offline'>
         You are offline now!
       </div>
     </Offline>
+    <ToastContainer
+    theme="light" 
+    autoClose={1000}
+    />
+
+    <CartContainr>
+    <WishLIstContainr>
+    <RouterProvider router={routes} />
+    </WishLIstContainr>
+    </CartContainr>
+
+
+
+
     </>
   );
 }

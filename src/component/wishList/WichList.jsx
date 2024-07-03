@@ -1,7 +1,7 @@
 import React, { useContext , useState ,useEffect} from 'react'
 import { wishListContext } from '../../context/WishList'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 export default function WichList( ) {
   let {counterWish ,setCounterWish , getWishList , removefromwish } =useContext(wishListContext)
@@ -10,15 +10,6 @@ export default function WichList( ) {
   const[wishItem , setWishItem] =useState([])
 
 
-  let notify = () => toast.error('Item removed from wishlist!', {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-
-  });
 
 useEffect(()=>{
   //self invicd fUNCTION 
@@ -42,6 +33,7 @@ async function deleteItems(id){
   console.log(data?data:[])
   setData(data?data:[])
   if(data.status ==='success'){
+    toast.error('Item removed from wishlist!')
     setLoading(false)
     setCounterWish(data?.count)
     setWishItem(data?.data)
@@ -79,8 +71,7 @@ async function deleteItems(id){
 
                       { item?.ratingsAverage }
                       {/* //remove wishlist */}
-                      <button onClick={()=> (deleteItems(item.id),notify())}  className='btn text-main fs-2 mx-3'><i className='fa-solid fa-heart px-2'></i></button>
-                      <ToastContainer />
+                      <button onClick={()=> (deleteItems(item.id))}  className='btn text-main fs-2 mx-3'><i className='fa-solid fa-heart px-2'></i></button>
                       </div>
                       </div> 
                       </div> 

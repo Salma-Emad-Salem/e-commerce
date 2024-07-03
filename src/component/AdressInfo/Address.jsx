@@ -108,7 +108,7 @@ export default function Address({children}) {
           <button type="button" className="btn d-block " onClick={()=>setPaymentMethod('cash')} > Cash on Delivery (COD)</button>
           <br />
           <br />
-          {paymentMethod && addressDetails.dirty && addressDetails.isValid ? (<button disabled={!loadingProduct} type="submit" className="btn submit d-block m-auto" >Submit</button>) : ''}
+          {paymentMethod && addressDetails.dirty && addressDetails.isValid ? (<button disabled={!loadingProduct} type="submit" className="btn button d-block m-auto" >Submit</button>) : ''}
           </div>:''}
 
 

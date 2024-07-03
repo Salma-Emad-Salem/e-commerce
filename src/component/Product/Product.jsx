@@ -1,38 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link  } from 'react-router-dom'
 import { cartContext } from '../../context/CartContext'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import { toast } from 'react-toastify';
+import { ColorRing } from 'react-loader-spinner';
 
 
 export default function Product( {item} ) {
- let { setCounter ,addToCart,userId }=useContext(cartContext)
-
-    let notify = () => toast.success('Item added to cart!', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+ let { setCounter ,addToCart }=useContext(cartContext);
+ let [loadingProduct,setLoadingProduct]=useState(true)
 
 
-   async function CartItem(productId){
-    return await addToCart(productId)
-   .then(data=>{
-    if(Array.isArray(data)){
-      setCounter(data?.numOfCartItems)
-      notify()
-    }
-console.log(data)
-setCounter(data?.numOfCartItems)
-notify()
-localStorage.setItem('userId',data.data?.cartOwner)
-  }).catch(err=>err)
 
+ async function addProductToCart(productId){
+  setLoadingProduct(false)
+  let data=await addToCart(productId)
+  .then(data=>data)
+  .catch(error=>error)
+  if(data?.status==='success'){
+    toast.success('Added to your cart successfully')
+    localStorage.setItem('userId',data?.data.cartOwner)
+    setLoadingProduct(true)
+    setCounter(data.numOfCartItems)
+  }
 }
 
   return (
@@ -56,11 +45,18 @@ localStorage.setItem('userId',data.data?.cartOwner)
                   </div>
                   
                   </Link>
-                  <button 
-                    onClick={
-                      ()=>( CartItem(item._id),  userId ) } 
-                    className='btn bg-main w-100 text-white'>Add To Cart</button>
-                    <ToastContainer />
+                  <button disabled={!loadingProduct} onClick={()=>{addProductToCart(item._id)}
+                } className='btn text-capitalize button'>
+                  {!loadingProduct?<ColorRing
+                  visible={true}
+                  height="25"
+                  width="25"
+                  ariaLabel="color-ring-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="color-ring-wrapper"
+                  colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
+                  />:'Add To Cart'}
+                </button>
                 </div>
         </div>
     </>

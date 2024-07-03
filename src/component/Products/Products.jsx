@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Product from '../Product/Product'
-
 export default function Products() {
   const [prod ,setProd]=useState([])
   const [loading , setLoading]=useState(true)

@@ -31,16 +31,14 @@ useEffect(()=>{
 },[])
   return (
     <div>
-        <div className="recipt py-5 mb-3">
+        <div className="recipt py-5 my-2">
           <div className="container">
-            <div className="row">
-            <div className="col-md-6  form-control py-4 mt-4">
-                 {orders.map(item=>{
-                    return<div key={item.id} className="UserCart">
-                    <div  className="details px-3">
+            <div className="row ">{orders.map(item=>{
+                    return<div key={item.id} className="UserCart col-md-3 offset-1">
+                    <div  className="details px-3 m-2 ">
                     <p className="text-main fw-bolder fs-4">Payment is Cash </p>
-                    <p className="my-2 text-main">Your total price is : {item.totalOrderPrice} EGP</p>
-                      <p className="my-2 text-main" >Your Address is :{item.shippingAddress.details} </p>
+                    <p className="my-2 text-main ">Your total price is : {item.totalOrderPrice} EGP</p>
+                      <p className="my-2 text-main textRe" >Your Address is :{item.shippingAddress.details} </p>
                       <p className="my-2 text-main">Your Number is : {item.shippingAddress.phone} </p>
                       <p className="my-2 text-main">Your City is : {item.shippingAddress.city} </p>
                     </div>
@@ -50,12 +48,12 @@ useEffect(()=>{
                       <div className="images">
                         
                          {item.cartItems?.map(items=>{
-                            return<div className="row border-bottom py-2">
+                            return<div key={items.id} className="row border-bottom py-2">
                   
-                            <div className="col-md-1">
+                            <div className="col-md-3">
                             <img src={items.product.imageCover} className='w-100' alt="" />
                            </div>
-                           <div className="col-md-11">
+                           <div className="col-md-9">
                            <h5>{items.product.title}</h5>
                                 <p className='text-main m-0'> Price : {items.price} EGP</p>
                            </div>
@@ -69,9 +67,9 @@ useEffect(()=>{
                       </div>
                     })}
 
+
             </div>
-            </div>
-            <button onClick={()=>navigate('/Home')} className="bg-main text-white  btn w-100   my-3 " type="submit">Confirm</button>
+            <button onClick={()=>navigate('/Home')} className="bg-main text-white  btn confirmBtn   my-3 " type="submit">Confirm</button>
           </div>
         
         </div>
